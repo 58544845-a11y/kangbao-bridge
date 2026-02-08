@@ -1,14 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/main.css">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kangbao Bridge — CCBA 开叫练习</title>
+  <link rel="stylesheet" href="styles/main.css" />
 </head>
 <body>
-    <h1>Welcome to Kangbao Bridge</h1>
-    <script src="scripts/evaluation.js"></script>
-    <script src="scripts/bidding.js"></script>
+  <header class="topbar">
+    <h1>Kangbao Bridge</h1>
+    <p class="subtitle">CCBA 自然体系 — 开叫互动测试（初级 / 中级）</p>
+  </header>
+
+  <main class="container">
+    <!-- 难度选择 -->
+    <section id="levelSelector" class="panel">
+      <h2>选择难度</h2>
+      <div class="level-buttons">
+        <button onclick="startQuiz('beginner')">初级</button>
+        <button onclick="startQuiz('intermediate')">中级</button>
+      </div>
+    </section>
+
+    <!-- 测试面板 -->
+    <section id="quizPanel" class="panel" style="display:none;">
+      <div class="quiz-header">
+        <span id="levelBadge">初级难度</span>
+        <div class="progress">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+        <div id="progressText">已完成 0 / 10</div>
+      </div>
+
+      <div class="hand-board">
+        <div class="suit" id="spades">
+          <h3>♠ 黑桃</h3>
+          <div id="spadesCards" class="cards"></div>
+        </div>
+        <div class="suit" id="hearts">
+          <h3>♥ 红桃</h3>
+          <div id="heartsCards" class="cards"></div>
+        </div>
+        <div class="suit" id="diamonds">
+          <h3>♦ 方块</h3>
+          <div id="diamondsCards" class="cards"></div>
+        </div>
+        <div class="suit" id="clubs">
+          <h3>♣ 梅花</h3>
+          <div id="clubsCards" class="cards"></div>
+        </div>
+      </div>
+
+      <div class="evaluation">
+        <h4>手牌评估</h4>
+        <div>HCP: <span id="hcpValue">0</span></div>
+        <div>分配点: <span id="dpValue">0</span></div>
+        <div>总点数: <span id="totalValue">0</span></div>
+        <div>最长花色: <span id="longestSuit">—</span></div>
+        <div id="handDescription"></div>
+      </div>
+
+      <div class="answer-area">
+        <input id="biddingInput" placeholder="输入开叫（例如：1NT、1♠、Pass）" />
+        <button id="submitBtn" onclick="submitBidding()">提交</button>
+      </div>
+
+      <div id="biddingFeedback" class="feedback"></div>
+
+      <div class="stats">
+        正确: <span id="correctCount">0</span> |
+        错误: <span id="wrongCount">0</span> |
+        正确率: <span id="correctRate">0%</span>
+      </div>
+    </section>
+
+    <!-- 完成面板 -->
+    <section id="completePanel" class="panel" style="display:none;">
+      <h2>测试完成</h2>
+      <div id="scoreCircle" class="score-circle">
+        <div id="scorePercentage">0%</div>
+      </div>
+      <div>正确: <span id="finalCorrect">0</span></div>
+      <div>错误: <span id="finalWrong">0</span></div>
+      <button onclick="resetQuiz()">重新开始</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>基于 CCBA 自然体系的练习工具 — 仅供学习参考</small>
+  </footer>
+
+  <script src="scripts/evaluation.js"></script>
+  <script src="scripts/bidding.js"></script>
+  <script src="scripts/quiz.js"></script>
 </body>
 </html>
